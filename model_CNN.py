@@ -6,7 +6,6 @@ import tensorflow as tf
 
 from model_function import *
 
-
 class CKT(object):
 
     def __init__(self, batch_size, num_steps, num_skills, hidden_size):
