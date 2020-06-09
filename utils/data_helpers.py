@@ -30,15 +30,6 @@ def read_data_from_csv_file(fileName):
         reader = csv.reader(csvfile, delimiter=',')
         for row in reader:
             rows.append(row)
-    '''
-    for indx in range(0, len(rows)):
-        if (indx + 1 )% 3 == 0:
-            rand = random.randint(0, len(rows[indx]) - 1)
-            if int(rows[indx][rand]) == 1:
-                rows[indx][rand] = 0
-            if int(rows[indx][rand]) == 0:
-                rows[indx][rand] = 1
-    '''
     
     index = 0
     print ("the number of rows is " + str(len(rows)))
@@ -47,15 +38,7 @@ def read_data_from_csv_file(fileName):
     while(index < len(rows)-1):
         problems_num = int(rows[index][0])
         tmp_max_skill = max(map(int, rows[index+1]))
-        '''
-        cc = []
-        for item in rows[index+2]:
-            cc.append(int(item))
-        a_r = round(sum(cc) / problems_num, 2)
-        if a_r == 0.0 or a_r == 1.0:
-            index += 3
-            continue
-        '''
+
         if(tmp_max_skill > max_skill_num):
             max_skill_num = tmp_max_skill
         if(problems_num <= 2):
@@ -93,15 +76,6 @@ def read_test_data_from_csv_file(fileName):
         reader = csv.reader(csvfile, delimiter=',')
         for row in reader:
             rows.append(row)
-    '''
-    for indx in range(0, len(rows)):
-        if (indx + 1 )% 3 == 0:
-            rand = random.randint(0, len(rows[indx]) - 1)
-            if int(rows[indx][rand]) == 1:
-                rows[indx][rand] = 0
-            if int(rows[indx][rand]) == 0:
-                rows[indx][rand] = 1
-    '''
     
     index = 0
     print ("the number of rows is " + str(len(rows)))
@@ -110,15 +84,7 @@ def read_test_data_from_csv_file(fileName):
     while(index < len(rows)-1):
         problems_num = int(rows[index][0])
         tmp_max_skill = max(map(int, rows[index+1]))
-        '''
-        cc = []
-        for item in rows[index+2]:
-            cc.append(int(item))
-        a_r = round(sum(cc) / problems_num, 2)
-        if a_r == 0.0 or a_r == 1.0:
-            index += 3
-            continue
-        '''
+        
         if(tmp_max_skill > max_skill_num):
             max_skill_num = tmp_max_skill
         if(problems_num <= 2):
