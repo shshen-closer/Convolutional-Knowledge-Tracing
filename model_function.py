@@ -67,20 +67,12 @@ def cnn_block(x, filter1, k1, k2, drop_rate, is_training):
     return o2 + x
 def CNN(x, skills, individual, next_skill, out_size, drop_rate, is_training):
     print(np.shape(x))
-
     att = cal_att(skills)
-
     x2 = tf.matmul(att, x)
-
     x = tf.concat([x,x2,individual],axis = -1)
-
     x = GLU(x, out_size)
-
-
     for i in range(1,4):
         x = cnn_block(x,out_size, 6, 6, drop_rate, is_training)
-        
     x = x*next_skill
-
     return x
   
