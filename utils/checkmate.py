@@ -140,4 +140,5 @@ def get_best_checkpoint(best_checkpoint_dir, select_maximum_value=True):
                                 key=best_checkpoints.get,
                                 reverse=select_maximum_value)
     ]
+    
     return os.path.join(os.path.abspath(best_checkpoint_dir),  best_checkpoints[0])
