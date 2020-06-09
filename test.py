@@ -36,7 +36,6 @@ tf.flags.DEFINE_string("checkpoint_dir", MODEL_DIR, "Checkpoint directory from t
 tf.flags.DEFINE_string("best_checkpoint_dir", BEST_MODEL_DIR, "Best checkpoint directory from training run")
 
 # Model Hyperparameters
-tf.flags.DEFINE_float("l2_lambda", 0.0001, "Lambda for l2 loss.")
 tf.flags.DEFINE_float("learning_rate", 0.003, "Learning rate")
 tf.flags.DEFINE_float("norm_ratio", 10, "The ratio of the sum of gradients norms of trainable variable (default: 1.25)")
 tf.flags.DEFINE_float("keep_prob", 0.2, "Keep probability for dropout")
