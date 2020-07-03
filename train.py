@@ -259,43 +259,6 @@ def train():
                     for p in pred:
                         pred_labels.append(p)
                     current_step = tf.train.global_step(sess, ckt.global_step)
-                ll = data_size - index
-                x = np.zeros((ll, max_num_steps))
-                xx = np.zeros((ll, max_num_steps))
-                next_id = np.zeros((ll, max_num_steps))
-                l = np.ones((ll, max_num_steps, max_num_skills))
-                target_id = []
-                target_correctness = []
-                target_id2 = []
-                target_correctness2 = []
-                for i in range(ll):
-                    student = train_students[index+i]
-                    problem_ids = student[1]
-                    correctness = student[2]
-                    correct_num = np.zeros(max_num_skills)
-                    answer_count = np.ones(max_num_skills)
-                    for j in range(len(problem_ids)-1):
-                        problem_id = int(problem_ids[j])
-                        
-                        if(int(correctness[j]) == 0):
-                            x[i, j] = problem_id + max_num_skills
-                        else:
-                            x[i, j] = problem_id
-                            correct_num[problem_id] += 1
-                        l[i,j] = correct_num / answer_count
-                        answer_count[problem_id] += 1
-                        xx[i,j] = problem_id
-                        next_id[i,j] = int(problem_ids[j+1])
-                        target_id.append(i*max_num_steps+j)
-                        target_correctness.append(int(correctness[j+1]))
-                        actual_labels.append(int(correctness[j+1]))
-                    target_id2.append(i*max_num_steps+j)
-                    target_correctness2.append(int(correctness[j+1]))
-                    
-                pred  = train_step(x, xx, l, next_id, target_id, target_correctness, target_id2, target_correctness2)
-                for p in pred:
-                        pred_labels.append(p)
-                current_step = tf.train.global_step(sess, ckt.global_step)
                 b=datetime.now()
                 e_time = (b-a).total_seconds()
                 run_time.append(e_time)
@@ -355,45 +318,7 @@ def train():
                         pred  = validation_step(x, xx, l, next_id, target_id, target_correctness, target_id2, target_correctness2)
                         for p in pred:
                                 pred_labels.append(p)
-                    
-                    ll = data_size - index
-                    x = np.zeros((ll, max_num_steps, ))
-                    xx = np.zeros((ll, max_num_steps))
-                    next_id = np.zeros((ll, max_num_steps))
-                    l = np.ones((ll, max_num_steps, max_num_skills))
-                    target_id = []
-                    target_correctness = []
-                    target_id2 = []
-                    target_correctness2 = []
-                    for i in range(ll):
-                        student = test_students[index+i]
-                        problem_ids = student[1]
-                        correctness = student[2]
-                        correct_num = np.zeros(max_num_skills)
-                        answer_count = np.ones(max_num_skills)
-                        for j in range(len(problem_ids)-1):
-                            problem_id = int(problem_ids[j])
-                            
-                            if(int(correctness[j]) == 0):
-                                x[i, j] = problem_id + max_num_skills
-                            else:
-                                x[i, j] = problem_id
-                                correct_num[problem_id] += 1
-                            l[i,j] = correct_num / answer_count
-                            answer_count[problem_id] += 1
-                            xx[i,j] = problem_id
-                            next_id[i,j] = int(problem_ids[j+1])
-                            target_id.append(i*max_num_steps+j)
-                            target_correctness.append(int(correctness[j+1]))
-                            actual_labels.append(int(correctness[j+1]))
-                        target_id2.append(i*max_num_steps+j)
-                        target_correctness2.append(int(correctness[j+1]))
-                        
 
-                    pred  = validation_step(x, xx, l, next_id, target_id, target_correctness, target_id2, target_correctness2)
-                    for p in pred:
-                            pred_labels.append(p)
-                   
                     rmse = sqrt(mean_squared_error(actual_labels, pred_labels))
                     fpr, tpr, thresholds = metrics.roc_curve(actual_labels, pred_labels, pos_label=1)
                     auc = metrics.auc(fpr, tpr)
