@@ -62,6 +62,6 @@ class CKT(object):
         self.pred = tf.sigmoid(selected_logits, name="pred")
 
         # loss function
-        self.loss = tf.reduce_sum(tf.nn.sigmoid_cross_entropy_with_logits(logits=selected_logits, labels=self.target_correctness), name="losses")
+        self.loss = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(logits=selected_logits, labels=self.target_correctness), name="losses")
         
         self.cost = self.loss
