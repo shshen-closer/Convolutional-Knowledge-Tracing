@@ -263,8 +263,7 @@ def train():
                 e_time = (b-a).total_seconds()
                 run_time.append(e_time)
                 rmse = sqrt(mean_squared_error(actual_labels, pred_labels))
-                fpr, tpr, thresholds = metrics.roc_curve(actual_labels, pred_labels, pos_label=1)
-                auc = metrics.auc(fpr, tpr)
+                auc = metrics.roc_auc_score(actual_labels, pred_labels)
                 #calculate r^2
                 r2 = r2_score(actual_labels, pred_labels)
                 pred_score = np.greater_equal(pred_labels,0.5) 
@@ -320,8 +319,7 @@ def train():
                                 pred_labels.append(p)
 
                     rmse = sqrt(mean_squared_error(actual_labels, pred_labels))
-                    fpr, tpr, thresholds = metrics.roc_curve(actual_labels, pred_labels, pos_label=1)
-                    auc = metrics.auc(fpr, tpr)
+                    auc = metrics.roc_auc_score(actual_labels, pred_labels)
                     #calculate r^2
                     r2 = r2_score(actual_labels, pred_labels)
                     pred_score = np.greater_equal(pred_labels,0.5) 
