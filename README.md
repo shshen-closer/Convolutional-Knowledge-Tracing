@@ -2,7 +2,7 @@
 Source code and data set for the paper *Convolutional Knowledge Tracing: Modeling Individualization in Student Learning Process*.
 
 # Citation
-if this repository is helpful for you, pleas cite our work
+if this repository is helpful for you, please cite our work
 
 ```
 @article{shen2020convolutional,
